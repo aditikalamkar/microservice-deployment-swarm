@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{option_a}} vs {{option_b}}!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="vote-container">
+      <h1>🐍 {{option_a}} <span>vs</span> 🟩 {{option_b}}</h1>
+      <form method="POST" action="/">
+        <button class="vote-btn python" type="submit" name="vote" value="a">
+          <i class="fab fa-python"></i> {{option_a}}
+        </button>
+        <button class="vote-btn node" type="submit" name="vote" value="b">
+          <i class="fab fa-node-js"></i> {{option_b}}
+        </button>
+      </form>
+      <p class="tip">(Tip: You can change your vote)</p>
+      <div class="hostname">Container ID: {{hostname}}</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    {% if vote %}
+    <script>
+      var vote = "{{vote}}";
+      if (vote === "a") {
+        $(".python").prop("disabled", true).append(" ✅");
+        $(".node").css("opacity", "0.4");
+      } else if (vote === "b") {
+        $(".node").prop("disabled", true).append(" ✅");
+        $(".python").css("opacity", "0.4");
+      }
+    </script>
+    {% endif %}
+  </body>
+</html>
